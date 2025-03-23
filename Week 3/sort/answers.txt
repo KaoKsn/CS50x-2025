@@ -1,0 +1,11 @@
+sort1 uses: bubble sort
+
+How do you know?: It takes the least amount of time to sort perfectly sorted list of inputs.
+
+sort2 uses: merge sort
+
+How do you know?: It takes the least amount of time to sort the reversed list of inputs.
+
+sort3 uses: selection sort
+
+How do you know?: It takes the most time to sort both reversed list of inputs and sorted list of inputs.
