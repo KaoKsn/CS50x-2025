@@ -1,0 +1,14 @@
+1. To cateogrize the listener's audio aura I would use the average of the following parameters of the top 100 songs of the listener:
+    a. Energy
+    b. Danceability
+    c. Loudness
+    d. Valence
+    e. Tempo
+    f. Speechiness
+High energy moving songs will score high in all of these parameters, while a soothing, calm song will score low in almost all the parameters.
+
+
+2. Even after considering these many parameters, the result might still not be the best fit due to the following reasons:
+    a. The genre of songs that the listener's favorite artist mostly produces is not taken into account. This could improve the accuracy of the listener's mood.
+    b. The duration of songs also tells the kind of songs that the listener appreciates. In most cases, high energy songs are shorter while songs that have depth take time.
+    

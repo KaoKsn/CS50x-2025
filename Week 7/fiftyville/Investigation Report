@@ -1,0 +1,206 @@
+-- A close look into the database.
+.SCHEMA
+.TABLES
+
+-- Background from the interviews table.
+SELECT * FROM interviews WHERE day = 28 AND year = 2024 AND month = 7;
+
+-- Witness Statements:
+/*
+ * 1. Ruth -
+ * Saw the thief leave the bakery parking lot in a car within ten minutes of the theft.
+ * 2. Eugene -
+ * Saw the thief withdrawing money earlier that morning at the ATM on Leggett Street.
+ * 3. Raymond -
+ * Heard the thief make a phone call which lasted under a minute ,while leaving the bakery.
+ * The thief mentioned taking the earliest flight out of Fiftyville the next day and asked the other person to buy an air ticket.
+ */
+
+-- bakery_security_logs:
+SELECT * FROM bakery_security_logs WHERE day = 28 AND year = 2024 AND month = 7 AND hour = 10 AND (minute >= 16 AND minute <= 25);
+
+/*
+ * Log ID,Time,Direction,License Plate
+ * 260,10:16,exit,5P2BI95
+ * 261,10:18,exit,94KL13X
+ * 262,10:18,exit,6P58WS2
+ * 263,10:19,exit,4328GD8
+ * 264,10:20,exit,G412CB7
+ * 265,10:21,exit,L93JTIZ
+ * 266,10:23,exit,322W7JE
+ * 267,10:23,exit,0NTHK55
+ */
+
+-- Using the license_plate to find the people associated.
+SELECT name, license_plate FROM people WHERE license_plate IN
+(SELECT license_plate FROM bakery_security_logs WHERE
+day = 28 AND year = 2024 AND month = 7 AND (minute >= 16 AND minute <= 25) AND hour = 10);
+
+/*
+ * 8 Suspects.
+ * Vanessa,5P2BI*95
+ * Barry,6P58WS2
+ * Iman,L93JTIZ
+ * Sofia,G412CB7
+ * Luca,4328GD8
+ * Diana,322W7JE
+ * Kelsey,0NTHK55
+ * Bruce,94KL13X
+ */
+
+-- Get the details of passangers in the flight that flew in the early morning of 29/7/2024.
+SELECT * FROM passengers WHERE flight_id IN (SELECT id FROM flights WHERE origin_airport_id = (SELECT id FROM airports WHERE city = 'Fiftyville') AND year = 2024 AND month = 7 AND day = 29 AND hour <= 10);
+
+-- After we get the passport_number of the passengers, get their names using the people table.
+SELECT * FROM people WHERE passport_number IN (SELECT passport_number FROM passengers WHERE flight_id IN (SELECT id FROM flights WHERE origin_airport_id = (SELECT id FROM airports WHERE city = 'Fiftyville') AND year = 2024 AND month = 7 AND day = 29 AND hour <= 10));
+
+/* We get the name , phone_number, passport_number,id(person) and license_plate.
+ * 210641,Heather,"(502) 555-6712",4356447308,NULL
+ * 341739,Rebecca,"(891) 555-5672",6264773605,NULL
+ * 354903,Marilyn,"(568) 555-3190",7441135547,0R0FW39
+ * 395717,Kenny,"(826) 555-1652",9878712108,30G67EN
+ * 398010,Sofia,"(130) 555-0289",1695452385,G412CB7
+ * 423393,Carol,"(168) 555-6126",6128131458,81MNC9R
+ * 449774,Taylor,"(286) 555-6063",1988161715,1106N58
+ * 467400,Luca,"(389) 555-5198",8496433585,4328GD8
+ * 560886,Kelsey,"(499) 555-9472",8294398571,0NTHK55
+ * 651714,Edward,"(328) 555-1152",1540955065,130LD9Z
+ * 686048,Bruce,"(367) 555-5533",5773159633,94KL13X
+ * 745650,Sophia,"(027) 555-1068",3642612721,13FNH73
+ * 750165,Daniel,"(971) 555-6468",7597790505,FLFN3W0
+ * 953679,Doris,"(066) 555-9701",7214083635,M51FA04
+ */
+
+-- All the info about the cars exiting the bakery 10 minutes after the robbery.
+SELECT * FROM bakery_security_logs WHERE year = 2024 AND day = 28 AND month = 7 AND hour = 10 AND (minute >= 16 AND minute <= 25);
+
+/*
+ * Suspects from 8 to 4.
+ * Order,Person ID,Name,Phone Number,Passport Number,License Plate,Exit Time,Bakery Log Entry ID
+ * 1,686048,Bruce,(367) 555-5533,5773159633,94KL13X,10:18 AM,261
+ * 2,467400,Luca,(389) 555-5198,8496433585,4328GD8,10:19 AM,263
+ * 3,398010,Sofia,(130) 555-0289,1695452385,G412CB7,10:20 AM,264
+ * 4,560886,Kelsey,(499) 555-9472,8294398571,0NTHK55,10:23 AM,267
+ */
+
+-- From the phone_calls table get the names of people who were called by the above 4 suspects during the 1-2 minutes time frame (10.15am - crime committed and witness ensures that they saw the theif have a call(duration <1 min) while leaving the bakery).
+SELECT * FROM phone_calls JOIN people ON people.phone_number = phone_calls.caller WHERE year = 2024 AND month = 7 AND day = 28 AND duration <= 70 AND (caller = '(130) 555-0289' OR caller = '(389) 555-5198' OR caller = '(499) 555-9472' OR caller = '(367) 555-5533');
+
+/*
+ * | 221 | (130) 555-0289 | (996) 555-8899 | 51  - Sofia
+ * | 224 | (499) 555-9472 | (892) 555-8872 | 36  - Kelsey
+ * | 233 | (367) 555-5533 | (375) 555-8161 | 45  - Bruce
+ * | 251 | (499) 555-9472 | (717) 555-1342 | 50  - Kelsey
+ *
+ * Rules out Luca as the suspect.
+ * Suspect list - 3 (Sofia, Kelsey, Bruce)
+ */
+
+-- Get the know the receivers of phone calls from the suspects , from the people table.
+SELECT * FROM phone_calls JOIN people ON people.phone_number = phone_calls.receiver WHERE duration < 60 AND day = 28 AND month = 7 AND year = 2024 AND (caller = '(130) 555-0289' OR caller = '(389) 555-5198' OR caller = '(499) 555-9472' OR caller = '(367) 555-5533');
+
+/*
+ * Call ID,Caller Number,Receiver Number,Duration (min),Person ID,Name,Passport Number,License Plate
+ * 221,(130) 555-0289,(996) 555-8899,51,567218,Jack,9029462229,52R0Y8U
+ * 224,(499) 555-9472,(892) 555-8872,36,251693,Larry,2312901747,O268ZZ0
+ * 233,(367) 555-5533,(375) 555-8161,45,864400,Robin,NULL,4V16VO0
+ * 251,(499) 555-9472,(717) 555-1342,50,626361,Melissa,7834357192,NULL
+ *
+ * Sofia called Jack
+ * Kelsey called Larry, Melissa
+ * Bruce called Robin
+ */
+
+-- Let us examine who made transactions for the air tickets at Leggett Street near Emma's Bakery
+SELECT * FROM atm_transactions WHERE atm_location = 'Leggett Street' AND transaction_type = 'withdraw' AND year = 2024 AND day = 28 AND month = 7;
+
+/*
+ * id,account_number,amount
+ * 246,28500762,48
+ * 264,28296815,20
+ * 266,76054385,60
+ * 267,49610011,50
+ * 269,16153065,80
+ * 288,25506511,20
+ * 313,81061156,30
+ * 336,26013199,35
+ */
+
+-- Get the person_id from the table bank_accounts using this info
+SELECT person_id FROM bank_accounts WHERE account_number IN
+(SELECT account_number FROM atm_transactions WHERE
+year = 2024 AND month = 7 AND day = 28 AND
+atm_location = 'Leggett Street' AND transaction_type = 'withdraw');
+
+/*
+ * person_id
+ * 686048
+ * 514354
+ * 458378
+ * 395717
+ * 396669
+ * 467400
+ * 449774
+ * 438727
+ */
+
+-- Let us get their names.
+SELECT * FROM people WHERE id IN
+(SELECT person_id FROM bank_accounts WHERE account_number IN
+(SELECT account_number FROM atm_transactions WHERE
+year = 2024 AND month = 7 AND day = 28 AND
+atm_location = 'Leggett Street' AND transaction_type = 'withdraw'));
+
+/*
+ * id,name,phone_number,passport_number,license_plate
+ * 395717,Kenny,(826) 555-1652,9878712108,30G67EN
+ * 396669,Iman,(829) 555-5269,7049073643,L93JTIZ
+ * 438727,Benista,(338) 555-6650,9586786673,8X428L0
+ * 449774,Taylor,(286) 555-6063,1988161715,1106N58
+ * 458378,Brooke,(122) 555-4581,4408372428,QX4YZN3
+ * 467400,Luca,(389) 555-5198,8496433585,4328GD8
+ * 514354,Diana,(770) 555-1861,3592750733,322W7JE
+ * 686048,Bruce,(367) 555-5533,5773159633,94KL13X
+ *
+ * People who were called by the 3 suspects - Jack , Melissa, Robin, Larry.
+ */
+
+-- People who have boarded flights the next day - Bruce , Luca
+-- But Luca hasn't called anyone. Bruce called Robin.
+-- Suspect List - Bruce only.
+-- Getting the flight which Bruce took
+SELECT * FROM passengers WHERE (flight_id = 36 OR flight_id = 43) AND passport_number = 5773159633;
+
+-- flight_id = 36 and seat = 4A
+
+-- Where did the flight go?
+-- destination_id = 4  - Which airport? (from table airports)
+
+SELECT * FROM airports WHERE id = 4;
+-- 4,LGA,"LaGuardia Airport","New York City"
+
+
+-- Confirmation:
+-- Let us look at the atm_transactions of each of the suspect and the person they were in contact with.
+SELECT * from atm_transactions where
+account_number = (select account_number from bank_accounts where person_id = (select id from people where name = 'Bruce'));
+/* Assessment:
+ * 1. Larry, Kelsey and Melissa have no atm transactions on the day of theft.
+ * 2. Sofia and Jack too have no atm transactions on the day of theft.
+ * 3. Robin comes out clean
+ * 4. Bruce , on the day of crime, withdrew sum of $50.
+ */
+
+-- Final Note:
+-- The witness mistook the theif for the accomplice. It is evident that 'Robin' did not have any transaction in 'Leggett Street' on 28/7/2024.
+-- His only transaction there was on 30/7/2024 - ($10 withdrawn)
+
+
+-- Robin as the accomplice.
+SELECT * FROM phone_calls WHERE caller = (SELECT phone_number FROM people WHERE name = 'Bruce') AND duration < 70 AND day = 28;
+-- 233,"(367) 555-5533","(375) 555-8161"(Receiver) - 45 second talk.
+-- Who is the receiver?
+SELECT * FROM people WHERE phone_number = '(375) 555-8161';
+-- 864400(person_id),Robin,"(375) 555-8161",NULL(passport_number),4V16VO0
+-- But since, Robin was the only one in contact with Bruce on the day of theft. He might be the accomplice.
+
