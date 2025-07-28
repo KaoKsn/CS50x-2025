@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>Login</title>
+{% endblock %}
+
+{% block body %}
+        <h1 style = 'text-align:center;'>Welcome!</h1>
+        <hr>
+
+        <form method = 'post' action = '/login'>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Log In</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td><input type = 'email' name = 'mail' placeholder = 'Email Address' autofocus autocomplete = 'off' required></td>
+                        </tr>
+                        <tr>
+                            <td><input type = 'password' placeholder = 'Password' autocomplete = 'off' required name = 'password'></td>
+                        </tr>
+                        <tr>
+                            <td><button type ='submit'>Log In</button></td>
+                        </tr>
+                </tbody>
+            </table>
+        </form>
+{% endblock %}
+

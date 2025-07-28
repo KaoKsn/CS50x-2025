@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+{# Failure can happen, if 1. Either one of them is blank or 2. Malicious input is read #}
+    <h1>Error</h1>
+    Registration failed!
+    {% if not sport %}
+        Please select a sport of your choice!
+    {% elif not name %}
+        Please enter your name!
+    {% else %}
+        Malicious intent suspsected. Better luck next time. LOL!
+    {% endif %}
+    <img src = '/static/cat.jpg' alt = 'grumpy cat'>
+{% endblock %}

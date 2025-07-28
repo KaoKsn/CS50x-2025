@@ -1,0 +1,47 @@
+<!doctype html>
+
+<html lang = 'en'>
+    <head>
+        <style>
+            .center_element
+            {
+                text-align:center;
+            }
+        </style>
+        <title>Background</title>
+    </head>
+
+    <body>
+        <header class = 'center_element'>
+            <h1>Changing Background</h1>
+        </header>
+
+        <main class = 'center_element'>
+            <button id = 'red'>R</button>
+            <button id = 'green'>G</button>
+            <button id = 'blue'>B</button>
+
+            <script>
+                let body = document.querySelector('body');
+
+                body.querySelector('#red').addEventListener('click',function(){
+                    alert('red');
+                    body.style.backgroundColor = 'red';
+                });
+
+                body.querySelector('#green').addEventListener('click',function(){
+                    body.style.backgroundColor = 'green';
+                });
+
+                body.querySelector('#blue').addEventListener('click',function(){
+                    body.style.backgroundColor = 'blue';
+                });
+            </script>
+        </main>
+
+        <footer>
+            <h3>
+                Copyright &#169 2020-2030
+            </h3>
+        </footer>
+</html>

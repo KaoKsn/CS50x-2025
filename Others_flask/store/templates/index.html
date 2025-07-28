@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>Books</title>
+{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>Books</h1>
+    </header>
+    {% for book in books %}
+        <form action = '/cart' method = 'post'>
+            <h2>{{book['name']}}</h2>
+            <input type = 'hidden' name = 'id' value = '{{book.id}}'>
+            <button type = 'submit'>Add to Cart</button>
+        </form>
+    {% endfor %}
+
+
+
+
+{# This method fails....
+    <form action = '/cart' method = 'post'>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Book</th>
+                    <th>Cart</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{book['id']}}</td>
+                        <td>{{book['name']}}</td>
+                        <td><input type = 'hidden' name = 'title' value = '{{book.name}}'>
+                            <button type = 'submit'>Add to Cart</button></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+#}
+{% endblock %}

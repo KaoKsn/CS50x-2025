@@ -1,0 +1,51 @@
+<!doctype html>
+
+<html lang = 'en'>
+    <head>
+        <style>
+            .center_element
+            {
+                text-align:center;
+            }
+        </style>
+        <title>Autocomplete</title>
+    </head>
+
+    <body>
+        <div class = 'center_element'>
+            <header>
+                <h1>Autocompleting your choices.</h1>
+            </header>
+
+            <main>
+                <input type = 'text' placeholder = 'Query' autocomplete = 'off' autofocus>
+
+                <label></label>
+            </main>
+
+            <!-- Including the dictionary -->
+            <script src = 'dict.js' rel = 'javascript'></script>
+            <script>
+                let input = document.querySelector('input');
+
+                input.addEventListener('keyup', function(event){
+                    let html = '';
+                    if(input.value)
+                    {
+                        for(word of WORDS){
+                            if(word.startsWith(input.value))
+                            html+=`<option>${word}`;
+                        }
+                    }
+                    document.querySelector('label').innerHTML = html;
+                });
+            </script>
+        </div>
+
+        <footer>
+            <h3>
+                Copyright &#169 2020-2030
+            </h3>
+        </footer>
+</html>
+

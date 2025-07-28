@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    <title>Cart</title>
+{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>Cart Details</h1>
+    </header>
+    <!-- books is a list of dictionary where each dictionary is of form {'name':'book_name'}-->
+    <table>
+        <thead>
+            <tr>
+                <th>Serial Number</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{book['name']}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+    <form method = 'post' action = '/clearcart'>
+        <button type = 'submit'>Clear Cart</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang = 'en'>
+    <head>
+        <style>
+            .center_elements
+            {
+                text-align:center;
+            }
+            body
+            {
+                font-style:italic;
+            }
+        </style>
+        <script src = 'script.js' rel='javascript'></script>
+        <title>JavaScript</title>
+    </head>
+    <body>
+        <head>
+            <h1 class = 'center_elements'>Jarvis et al. Marvel</h1>
+        </head>
+        <main>
+            <!-- onsubmit a function greet() is called but the answer is not given to the server. -->
+             <div>
+                <form type = 'get' onsubmit = 'greet(); return false;'>
+                    <input type = 'text' autocomplete = 'off' autofocus id = 'name' placeholder = 'Name'>
+                    <input type = 'submit' value = 'Enter' style = 'color:Red'>
+                </form>
+            </div>
+            <br><br>
+
+            <form type = 'get' class = 'search-form' action = 'https://search.brave.com/search'>
+                <input type = 'search' autocomplete = 'off' autofocus id = 'search' placeholder = 'Query' name = 'q'>
+                <input type = 'submit' value = 'Search'>
+            </form>
+
+            <script>
+                function reassure(event)
+                {
+                    let query = document.querySelector('#search').value;
+                    alert('Do you really want to search for: ' + query);
+                }
+                let form = document.querySelector('.search-form');
+                form.addEventListener('submit',reassure);
+            </script>
+        </main>
+        <footer>
+            <h3>Copyright &#169 Jarvis 2020-2030</h3>
+        </footer>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+
+<html lang = 'en'>
+    <head>
+        <style>
+            .center_element
+            {
+                text-align:center;
+            }
+            .notice
+            {
+                font-style:italic;
+                color:red;
+            }
+        </style>
+        <title>Blinking</title>
+    </head>
+
+    <body>
+        <header class = 'center_element'>
+            <h1 class = 'notice'>Notice!</h1>
+        </header>
+        <main>
+            <script>
+                function blink()
+                {
+                    let header = document.querySelector('header');
+
+                    if(header.style.visibility == 'hidden')
+                    {
+                        header.style.visibility = 'visible';
+                    }
+                    else
+                    {
+                        header.style.visibility = 'hidden';
+                    }
+                }
+                window.setInterval(blink,500);
+            </script>
+        </main>
+        <footer>
+            <h3>
+                Copyright &#169 2020-2030
+            </h3>
+        </footer>
+</html>

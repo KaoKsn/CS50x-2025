@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>Shows</title>
+{% endblock %}
+
+{% block body %}
+    <main>
+        {% for show in show_details %}
+            <li>{{show.title}}</li>
+        {% endfor %}
+   </main>
+{% endblock %}

@@ -1,0 +1,31 @@
+header{
+    font-family:Ubuntu;
+    text-align:center;
+    color:#39ff14;
+}
+body{
+    font-family:Ubuntu;
+    color:#39ff14;
+    background-color:#000000;
+    accent-color: #ff073a
+}
+table,
+th,
+tr,
+td{
+    margin-left:auto;
+    margin-right:auto;
+    padding: 0.25px;
+    border: 1px solid white;
+    text-align:center;
+}
+td{
+    height:30px;
+}
+form{
+    margin-left: auto;
+    margin-right:auto;
+    padding: 2px;
+    border: 1px solid white;
+    color: #ff073a;
+}

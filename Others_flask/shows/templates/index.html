@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>Movie DB</title>
+{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>One Click -> Your Favorite Show</h1>
+    </header>
+
+    <hr>
+    <main>
+        <form action = '/search' method = 'get'>
+            <h2>Search IMDb</h2>
+            <input type = 'search' name = 'q' placeholder = 'Show Name' autocomplete = 'off' autofocus>
+            <button type = 'submit'>Search</button>
+
+            <ul></ul>
+        </form>
+
+        <script>
+            let input = document.querySelector('input');
+            input.addEventListener('input',async function(){
+
+                // Handling no input
+                if (input.value == '')
+                {
+                    document.querySelector('ul').innerHTML = '';
+                    return;
+                }
+
+                let response = await fetch('/autocomplete?q=' + input.value) // query for the search results beforehand using js fetch http requests.
+                let shows = await response.json()
+
+                let html = '';
+                for (let show of shows){
+                    html += '<li>' + show.title + '</li>';
+                }
+                document.querySelector('ul').innerHTML = html;
+            });
+        </script>
+    </main>
+
+    <hr>
+    <footer>
+        Thanks to IMDb for it's database.
+    </footer>
+{% endblock %}

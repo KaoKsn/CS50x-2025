@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <title>Shows</title>
+{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>Top Searches...</h1>
+    </header>
+    <main>
+        <ol>
+            {% for show in show_details %}
+                <li>
+                    <h2>{{show.title}}</h2>
+                    Date of Release: {{show.year}}<br>
+                    IMDb Ratings/Votes: <!--Ratings/Votes--><br>
+                    Director:<br>
+                    Star Cast:
+                    <hr>
+                </li>
+            {% endfor %}
+        </ol>
+   </main>
+
+{% endblock %}
