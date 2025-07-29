@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                /* Part 1 */
+                let section = document.querySelector('.section');
+
+                section.addEventListener('click', function(event) {
+                    let choice = event.srcElement.id;
+
+                    if (choice == 'choice1') {
+                        /* Turn the button green */
+                        section.querySelector('#choice1').style.backgroundColor = 'green';
+
+                        /* Display message */
+                        section.querySelector('#feedback').innerHTML = 'Correct';
+                    } else {
+                        /* Turn the button red */
+                        event.srcElement.style.backgroundColor = 'red';
+
+                        /* Display message */
+                        section.querySelector('#feedback').innerHTML = 'Incorrect';
+                    }
+                });
+            });
+        </script>
+        <title>Trivia!</title>
+    </head>
+
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>Which is the captial of India?</h3>
+
+                <p id='feedback'></p>
+
+                <button id='choice1'>New Delhi</button>
+                <button id='choice2'>Kolkata</button>
+                <button id='choice3'>Bengaluru</button>
+                <button id='choice4'>Mumbai</button>
+            </div>
+
+            <div class="secondsection">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>Which is the largest country in the world?</h3>
+                <p id='secondfeedback'></p>
+
+                <input type='text' autocomplete='off' autofocus id='answer' placeholder='Type your answer here'>
+                <button id='confirm'>Check Answer</button>
+
+                <script>
+                    let secondsection = document.querySelector('.secondsection');
+                    secondsection.querySelector('#confirm').addEventListener('click', function() {
+
+                        if (secondsection.querySelector('#answer').value.toLowerCase() == 'russia') {
+                            secondsection.querySelector('#answer').style.backgroundColor = 'green';
+                            secondsection.querySelector('#secondfeedback').innerHTML = 'Correct';
+                        } else {
+                            secondsection.querySelector('#answer').style.backgroundColor = 'red';
+                            secondsection.querySelector('#secondfeedback').innerHTML = 'Incorrect';
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+    </body>
+</html>
