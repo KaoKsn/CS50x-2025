@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <link href="styles.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Dennis Ritchie</title>
+    </head>
+
+    <body id='default_background'>
+        <div>
+            <header>
+                <h1 style='text-align:center'>Dennis Ritchie</h1>
+                <p style='text-align: center'>The Genius who shaped modern computing</p>
+                <hr>
+
+                <button id='darkmode'>Dark Mode</button>
+                <button id='lightmode'>Light Mode</button>
+
+                <script>
+                    // Dark mode.
+                    document.querySelector('#darkmode').addEventListener('click', function() {
+                        document.querySelector('body').style.backgroundColor = 'black';
+                        document.querySelector('body').style.color = 'white';
+                    });
+                    // Light mode.
+                    document.querySelector('#lightmode').addEventListener('click', function() {
+                        document.querySelector('body').style.backgroundColor = 'white';
+                        document.querySelector('body').style.color = 'black';
+                    });
+                </script>
+                <hr>
+                <h4 class='bg-primary'>Contents</h4>
+                <a href='#introduction'>Introduction</a><br>
+                <a href='#education'>Education</a><br>
+                <a href='#career'>Career and Awards</a><br>
+                <a href='#awards'>Awards</a><br>
+            </header>
+        </div>
+        <main>
+            <!-- Biodata Card-->
+            <table class='biodata_table'>
+                <thead>
+                    <tr>
+                        <th>
+                            <img src='ritchie.jpg' alt='Dennis Ritchie' width='300px' height='300px'>
+                            <br>
+                            <b>Dennis MacAlistair Ritchie (NAE)</b>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td><b>Born</b>: September 9, 1941, Bronxville, New York, U.S.</td>
+                    </tr>
+                    <tr>
+                        <td><b>Death</b>: October 12, 2011 (aged 70) Berkeley Heights, New Jersey, U.S.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id='introduction'>
+                <br>
+                <h3 class='header fw-bold bg-primary'>Introduction</h3>
+                <hr>
+                Dennis MacAlistair Ritchie was an American computer scientist fondly remembered as the
+                co-creator of the <a href="c.html">C Programming Language</a>,
+                the <a href="unix.html">Unix operating system</a>,
+                and <a href='https://en.wikipedia.org/wiki/B_(programming_language)'>B Programming Language</a>
+                with long-time colleague <a href="thompson.html">Ken Thompson</a>.
+                Ritchie and Thompson were awarded the Turing Award from the Association for Computing Machinery (ACM) in 1983,
+                the IEEE Richard W. Hamming Medal from the Institute of Electrical and Electronics Engineers (IEEE) in 1990,
+                and the National Medal of Technology from President Bill Clinton in 1999.
+                Ritchie served as the head of Lucent Technologies System Software Research Department when he retired in 2007.
+            </div>
+
+            <div id='education'>
+                <br>
+                <h3 class='header fw-bold bg-primary'>Education</h3>
+                <hr>
+                Dennis was born in New York. His father, Alistair E. Ritchie was a scientist at Bell Labs
+                where Ritchie would go on to work at.Dennis completed his school education from Summit High School.
+                He would move on to obtain degrees in physics and applied mathematics from Harvard University.
+            </div>
+
+            <div id='career'>
+                <br>
+                <h3 class='header fw-bold bg-primary'>Career</h3>
+                <hr>
+                <h4>Career</h4>
+                Dennis's work at AT&T Bell Labs would move on to revolutionize computer science forever.
+                His worked for the Labs from the year 1967 to 2007 during which he co-created the Unix opearting system alongside his
+                collegue Ken Thompson, introducing principles such as modularity, multitasking and protability which became a standard in OS design.
+                <p>In the year 1969, Ritchie developed the C programming language which succeeded languages like B and BCPL.
+                    By 1973, Ritchie and Ken rewrote the entire Unix kernel in C making it the first OS to be written in a high level language.
+                    In 1978, Ritchie co-authored "The C Programming Language" with Brian Kernighan, a foundational text on C. The second edition of the same was
+                    publish in the year 1988 which reflected the changes introduced by the ANSI C standard(C89).
+                </p>
+            </div>
+
+            <div id='awards'>
+                <h3 class='header fw-bold bg-primary'>Awards</h4>
+                <table class='table table-info'>
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Award</th>
+                            <th>Awarding Institution</th>
+                            <th>Citation / Reason</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1983</td>
+                            <td>ACM Turing Award</td>
+                            <td>Association for Computing Machinery (ACM)</td>
+                            <td>For development of generic operating systems theory and implementation of Unix.</td>
+                        </tr>
+                        <tr>
+                            <td>1990</td>
+                            <td>IEEE Richard W. Hamming Medal</td>
+                            <td>Institute of Electrical and Electronics Engineers (IEEE)</td>
+                            <td>For the invention of the Unix OS and the C programming language.</td>
+                        </tr>
+                        <tr>
+                            <td>1997</td>
+                            <td>Fellow of the Computer History Museum</td>
+                            <td>Computer History Museum</td>
+                            <td>For co-creating Unix and C, and their profound impact on computing.</td>
+                        </tr>
+                        <tr>
+                            <td>1999</td>
+                            <td>National Medal of Technology</td>
+                            <td>U.S. Department of Commerce</td>
+                            <td>For co-inventing Unix and C, which together led to enormous advances in computing.</td>
+                        </tr>
+                        <tr>
+                            <td>2011</td>
+                            <td>Japan Prize</td>
+                            <td>Japan Prize Foundation</td>
+                            <td>For the development of Unix OS, which contributed to the advancement of information technology.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <footer>
+            <hr>
+            <h5>Special thanks to <a href='https://wikipedia.org/'>Wikipedia</a> and the owners of the photos used here.</h5>
+            <p>I highly recommend you read the original page @wikipedia: <a href='https://en.wikipedia.org/wiki/Dennis_Ritchie'>Dennis MacAlistair Ritchie</a></p>
+        </footer>
+    </body>
+
+</html>

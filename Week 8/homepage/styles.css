@@ -1,0 +1,41 @@
+body {
+    font-family: Ubuntu;
+}
+
+head {
+    font-family: Ubuntu;
+}
+
+.header {
+    font-family: Ubuntu;
+}
+
+a {
+    font-style: bold;
+}
+
+.main_content {
+    display: block;
+    justify-content: center;
+}
+
+.biodata_table {
+    border: 2px solid;
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+}
+
+#default_background {
+    background-color: black;
+    color: white;
+}
+
+table,
+tr,
+td,
+th {
+    padding: 2px;
+    text-align: center;
+    border: 2px solid;
+}

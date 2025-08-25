@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <link href="styles.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Ken Thompson</title>
+    </head>
+
+    <body id='default_background'>
+        <div>
+            <header>
+                <h1 style='text-align:center'>Ken Thompson</h1>
+                <p style='text-align: center'>The pioneer of Unix and B programming language</p>
+                <hr>
+                <button id='darkmode'>Dark Mode</button>
+                <button id='lightmode'>Light Mode</button>
+                <script>
+                    document.querySelector('#darkmode').addEventListener('click', function() {
+                        document.querySelector('body').style.backgroundColor = 'black';
+                        document.querySelector('body').style.color = 'white';
+                    });
+                    document.querySelector('#lightmode').addEventListener('click', function() {
+                        document.querySelector('body').style.backgroundColor = 'white';
+                        document.querySelector('body').style.color = 'black';
+                    });
+                </script>
+                <hr>
+                <h4 class='bg-primary'>Contents</h4>
+                <a href='#introduction'>Introduction</a><br>
+                <a href='#education'>Education</a><br>
+                <a href='#career'>Career and Awards</a><br>
+                <a href='#awards'>Awards</a><br>
+            </header>
+        </div>
+
+        <main>
+            <table class='biodata_table'>
+                <thead>
+                    <tr>
+                        <th>
+                            <img src='ken_thompson.jpg' alt='Ken Thompson' width='300px' height='400px'>
+                            <br>
+                            <b>Kenneth Lane Thompson</b>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>Born</b>: February 4, 1943, New Orleans, Louisiana, U.S.</td>
+                    </tr>
+                    <tr>
+                        <td><b>Education</b>: University of California, Berkeley (BS,MS)</td>
+                    </tr>
+                    <tr>
+                        <td><b>Known For</b>: grep, Unix, B language, C, Multics</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id='introduction'>
+                <br>
+                <h3 class='header fw-bold bg-primary'>Introduction</h3>
+                <hr>
+                <p>Kenneth Lane Thompson is an American computer scientist renowned for co-developing the Unix operating system, creating the B programming language, and contributing extensively to system software design. He collaborated with Dennis Ritchie at Bell Labs, laying foundational work in operating systems, compilers, and text processing tools.</p>
+            </div>
+
+            <div id='education'>
+                <br>
+                <h3 class='header fw-bold bg-primary'>Education</h3>
+                <hr>
+                <p>Thompson earned a bachelor's and master's degree in Electrical Engineering and Computer Science from the University of California, Berkeley. His formal training provided the groundwork for his later systems programming innovations at Bell Labs.</p>
+            </div>
+
+            <div id='career'>
+                <br>
+                <h3 class='header fw-bold bg-primary'>Career</h3>
+                <hr>
+                <h4>Career</h4>
+                <p>Thompson joined Bell Labs in 1966. In 1969, he co-created Unix with Dennis Ritchie, introducing modularity and portability in OS design. He authored the B programming language, precursor to C. Thompson also developed the first Unix shell and co-designed UTF-8 encoding with Rob Pike.</p>
+                <p>He later worked at Google and co-created the Go programming language. His contributions extend to computer chess, including the creation of the Belle chess machine, one of the earliest master-level chess computers.</p>
+            </div>
+
+            <div id='awards'>
+                <h3 class='header fw-bold bg-primary'>Awards</h3>
+                <table class='table table-info'>
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Award</th>
+                            <th>Awarding Institution</th>
+                            <th>Citation / Reason</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1983</td>
+                            <td>ACM Turing Award</td>
+                            <td>Association for Computing Machinery (ACM)</td>
+                            <td>For development of operating systems theory and implementation of Unix.</td>
+                        </tr>
+                        <tr>
+                            <td>1990</td>
+                            <td>IEEE Richard W. Hamming Medal</td>
+                            <td>Institute of Electrical and Electronics Engineers (IEEE)</td>
+                            <td>For development of the Unix OS and foundational contributions to software systems.</td>
+                        </tr>
+                        <tr>
+                            <td>1997</td>
+                            <td>Fellow of the Computer History Museum</td>
+                            <td>Computer History Museum</td>
+                            <td>For co-developing Unix and the B programming language.</td>
+                        </tr>
+                        <tr>
+                            <td>1999</td>
+                            <td>National Medal of Technology</td>
+                            <td>U.S. Department of Commerce</td>
+                            <td>For co-creating Unix and advancing computer science infrastructure.</td>
+                        </tr>
+                        <tr>
+                            <td>2011</td>
+                            <td>Japan Prize</td>
+                            <td>Japan Prize Foundation</td>
+                            <td>For contributions to the development of Unix which advanced global IT infrastructure.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <footer>
+            <hr>
+            <h5>Special thanks to <a href='https://wikipedia.org/'>Wikipedia</a> and the owners of photos used here.</h5>
+            <p>I highly recommend you read the original page @wikipedia: <a href='https://en.wikipedia.org/wiki/Ken_Thompson'>Kenneth Lane Thompson</a></p>
+        </footer>
+    </body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <link href="styles.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>C</title>
+    </head>
+
+    <body id='default_background'>
+        <div>
+            <header>
+                <h1 style='text-align:center'>The C Programming Language</h1>
+                <p style='text-align: center'>Similing Assassin</p>
+                <hr>
+
+                <button id='darkmode'>Dark Mode</button>
+                <button id='lightmode'>Light Mode</button>
+
+                <script>
+                    // Dark mode.
+                    document.querySelector('#darkmode').addEventListener('click', function() {
+                        document.querySelector('body').style.backgroundColor = 'black';
+                        document.querySelector('body').style.color = 'white';
+                    });
+                    // Light mode.
+                    document.querySelector('#lightmode').addEventListener('click', function() {
+                        document.querySelector('body').style.backgroundColor = 'white';
+                        document.querySelector('body').style.color = 'black';
+                    });
+                </script>
+                <hr>
+                <h4 class='bg-primary'>Contents</h4>
+                <a href='#introduction'>Introduction</a><br>
+                <a href='#hello_world'>Hello, World!</a><br>
+                <a href='#brief'>More Info</a><br>
+            </header>
+        </div>
+        <main>
+            <!-- Biodata Card-->
+            <table class='biodata_table'>
+                <thead>
+                    <tr>
+                        <th>
+                            <img src='C.svg' alt='C Logo' width='300px' height='300px'>
+                            <br>
+                            <b>The C Programming Language Logo</b>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td><b>Designed By</b>: Dennis Ritchie</td>
+                    </tr>
+                    <tr>
+                        <td><b>First Appeared</b>: 1972, 53 years ago.</td>
+                    </tr>
+                    <tr>
+                        <td><b>Typing Discipline</b>: Static, manifest</td>
+                    </tr>
+                    <tr>
+                        <td><b>Paradigm</b>: Imperative, Procedural, and Structured</td>
+                    </tr>
+                    <tr>
+                        <td><b>OS Development</b>: Unix, Linux kernels, embedded systems</td>
+                    </tr>
+                    <tr>
+                        <td><b>Influenced</b>: C++, C#, Java, Objective-C, Rust, Go</td>
+                    </tr>
+                    <tr>
+                        <td><b>Standards</b>: ANSI C (C89), ISO C (C90, C99, C11, C17, C23)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id='introduction'>
+                <br>
+                <h3 class='header fw-bold bg-primary'>Introduction</h3>
+                <hr>
+                <p>
+                    C is a general-purpose programming language. It was created in the 1970s by Dennis Ritchie to primarily write the UNIX operating system and remains widely used and influential.
+                    C is widely known for its speed, minimalism, and direct control over hardware with no memory and thread safety at compile time.
+                    It was the first high-level programming language used to write a kernel.
+                    By design, C gives the programmer relatively direct access to the features of the typical CPU architecture; customized for the target instruction set.
+                    It has been and continues to be used to implement operating systems (especially kernels), device drivers, and protocol stacks, but its use in application software has been decreasing.
+                    C is used on computers that range from the largest supercomputers to the smallest microcontrollers and embedded systems.
+                </p>
+            </div>
+
+            <div id='hello_world'>
+                <br>
+                <h3 class='header fw-bold bg-primary'>Hello, World!</h3>
+                <hr>
+                <pre>
+                    #include&lt;stdio.h&gt;
+                    int main(void) {
+                        printf("Hello, World!\n");
+                        return 0;
+                    }</pre>
+            </div>
+
+            <div id='brief'>
+                <br>
+                <h3 class='header fw-bold bg-primary'>More Information</h3>
+                <hr>
+                <p>
+                    A successor to the programming language B, C was originally developed at Bell Labs by Ritchie between 1972 and 1973 to construct utilities running on Unix.
+                    It was applied to re-implementing the kernel of the Unix operating system.During the 1980s, C gradually gained popularity.
+                    It has become one of the most widely used programming languages, with C compilers available for practically all modern computer architectures and operating systems.
+                    The book The C Programming Language, co-authored by the original language designer, served for many years as the de facto standard for the language.
+                    C has been standardized since 1989 by the American National Standards Institute (ANSI) and, subsequently, jointly by the International Organization for Standardization (ISO) and the International Electrotechnical Commission (IEC).
+                </p>
+                <p>
+                    C is an imperative procedural language, supporting structured programming, lexical variable scope, and recursion, with a static type system.
+                    It was designed to be compiled to provide low-level access to memory and language constructs that map efficiently to machine instructions, all with minimal runtime support.
+                    Despite its low-level capabilities, the language was designed to encourage cross-platform programming.
+                    A standards-compliant C program written with portability in mind can be compiled for a wide variety of computer platforms and operating systems with few changes to its source code.
+                    Although neither C nor its standard library provide some popular features found in other languages, it is flexible enough to support them. For example, object orientation and garbage collection are provided by external libraries GLib Object System and Boehm garbage collector, respectively.
+                </p>
+                <p>
+                    Since 2000, C has consistently ranked among the top four languages in the TIOBE index, a measure of the popularity of programming languages.
+                </p>
+
+            </div>
+        </main>
+
+        <footer>
+            <hr>
+            <h5>Special thanks to <a href='https://wikipedia.org/'>Wikipedia</a> and the owners of the photos used here.</h5>
+            <p>I highly recommend you read the original page @wikipedia: <a href='https://en.wikipedia.org/wiki/C_(programming_language)'>The C Programming Language</a></p>
+        </footer>
+    </body>
+
+</html>

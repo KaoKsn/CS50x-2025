@@ -1,0 +1,33 @@
+HTML Tags Used:
+1. <p>
+2. <script>
+3. <div>
+4. <a href = 'link'>
+5. <img>
+6. <hr>
+7. <br>
+8. <button>
+9. <table>
+10. <thead>
+11. <tbody>
+12. <b>
+13. <pre>
+
+
+CSS Properties Used:
+1. font-family
+2. font-style
+3. display
+4. justify-content
+5. border
+6. text-align
+7. margin
+8. padding
+9. background-color
+10. color
+
+JS - Javascript was used to add the feature of dark mode to the website and to make the links interactive when hovered over.
+BootStrap Framework - Bootstrap framework was used to improve the asthetics of the website. The following bootstrap components were used:
+    1. class bg-primary
+    2. class fw-bold
+    3. class table table-info
