@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    {% if portfolio %}
+        <table class="table table-success" style="font-size:20px">
+            <thead>
+                <tr>
+                    <th>Ticker Symbol</th>
+                    <th>Quantity</th>
+                    <th>Current Price</th>
+                    <th>Total Holdings</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in portfolio %}
+                    <tr>
+                        {% for info in stock %}
+                            <td>{{ stock[info] }}</td>
+                        {% endfor %}
+                        <td>{{ current_prices[loop.index0] | usd}}</td>
+                        <td>{{ (current_prices[loop.index0] * stock['quantity']) | usd }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3>Balance: ${{balance | usd}}</h3>
+        <h3>Stocks & Cash (Total Holdings): ${{total_holdings | usd }} </h3>
+
+    {% else %}
+        <h3>Balance: ${{balance | usd}}</h3>
+        <h3>Stocks & Cash (Total Holdings): {{total_holdings | usd }} </h3>
+    {% endif %}
+
+{% endblock %}

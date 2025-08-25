@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    {% if history %}
+        <table class="table table-success" style="font-size:20px">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Price (During Transaction)</th>
+                    <th>Quantity</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in history %}
+                    <tr>
+                        {% for info in row %}
+                            {% if row[info] is number %}
+                                <td>{{ row[info] | usd }}</td>
+                            {% else %}
+                                <td>{{ row[info] }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <form action = '/history' method = 'post'>
+            <input type = 'hidden' name = 'start_trading'>
+            <input type = 'submit' class = 'btn btn-primary' value = 'Start Trading'/>
+        </form>
+    {% endif %}
+{% endblock %}

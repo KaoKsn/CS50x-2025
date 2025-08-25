@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <table class="table table-success" style = "font-size:30px">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Symbol</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ quote['name'] }}</td>
+                <td>{{ quote['price'] | usd }}</td>
+                <td>{{ quote['symbol'] }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell Stocks
+{% endblock %}
+
+{% block main %}
+    <form action="/sell" method="post">
+        <div class="mb-3">
+            <select name="symbol" id="sym">
+            <option value="" disabled selected>Symbol</option>
+            {% for row in ticker %}
+                <option value = '{{ row["ticker"] }}'>{{ row['ticker'] }}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" class="form-control mx-auto w-auto" name="shares" placeholder="Units To Sell" type="number" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Sell Stocks</button>
+    </form>
+{% endblock %}
