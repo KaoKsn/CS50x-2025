@@ -19,7 +19,7 @@
                 {% for row in history %}
                     <tr>
                         {% for info in row %}
-                            {% if row[info] is number %}
+                            {% if row[info] is number and info == 'price' %}
                                 <td>{{ row[info] | usd }}</td>
                             {% else %}
                                 <td>{{ row[info] }}</td>

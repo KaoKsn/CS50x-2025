@@ -27,11 +27,11 @@
                 {% endfor %}
             </tbody>
         </table>
-        <h3>Balance: ${{balance | usd}}</h3>
-        <h3>Stocks & Cash (Total Holdings): ${{total_holdings | usd }} </h3>
+        <h3>Balance: {{balance | usd}}</h3>
+        <h3>Stocks & Cash (Total Holdings): {{total_holdings | usd }} </h3>
 
     {% else %}
-        <h3>Balance: ${{balance | usd}}</h3>
+        <h3>Balance: {{balance | usd}}</h3>
         <h3>Stocks & Cash (Total Holdings): {{total_holdings | usd }} </h3>
     {% endif %}
 
