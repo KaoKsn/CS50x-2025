@@ -1,0 +1,195 @@
+Add comments specifying the return types, error codes, etc of a function.
+
+
+-- Using
+Stacks, 
+Unions,
+Pointers,
+Structures,
+Enumerations,
+Dynamic Memory Management,
+Recursion.
+
+
+// Freeing array means freeing all the elements in them!
+So, if you have a seperate object, and you put it in the array. be sure to not free it again, 
+But when you impelement a simple GC, if refcount, dec it.
+
+// Handle self referencing arrays. Both printing and freeing.
+
+// How to handle the same element more than once in the array?
+set_array(array, 0, obj1);
+set_array(array, 1, obj1);
+Causes accessing a dangling pointer. Since with obj = NULL, you only put the current freed object to NULL.
+  |\(1)
+ /|  --> [Same obj i.e Memory In HEAP]
+/ |/
+a
+only (1) becomes NULL, when you start freeing them.
+
+We don't let them put NULL as the value for a string. Since both
+strlen(NULL) and strcpy(NULL) causes a SEGSEGV.
+
+Why initialize to NULL, in array, 
+to avoid deferencing/freeing dangling pointers during printing and freeing. 
+
+In set_array(object_t *obj, int index, object_t *src)
+  ***during failure/when you pass invalid args, if you don't free src that is passed directly, you have no method to free it afterwards in case of no GC.
+
+
+int main(){
+    object_t *objects[7] = {
+      get_int(3),
+      get_float(5.5),
+      get_string("thisstring"),
+      get_char('c'),
+      get_bool(true),
+      get_array(3),
+      get_string("second")
+    };
+
+    set_array(objects[5], 4, objects[1]);
+    // Causes free of objects[1] since the dec_refcount is called. def_counter accounts for NULL
+    for (int i = 0; i < 7; i++) {
+        if ( i != 1)
+          dec_refcount(objects[i]);
+  }
+
+  return 0;
+}
+How do I make the object NULL? obj=NULL after free doesn't work since obj is in the local stack frame that points to the memory in heap.
+
+
+Bad abuse:
+Calling set_array() at boundary all the time.
+Fix I can think of - Give a fixed size array.
+
+
+
+--- Working of MnS
+Creation of a VM (create_vm())
+Creation of a frame(get_frame(vm_t *)). Implicitly pushes it to the vm's frames stack(vm_push_frame(vm_t *vm, frame_t *frame).
+
+Object created(get_objtype(vm_t *vm))
+  Calls, get_obj(vm_t *vm) -> vm_track_object(vm_t *vm, object_t *obj) < Push into the objects stack of vm >
+
+frame_reference_obj(frame_t *frame, object_t *obj)
+  A frame is a part of a VM.
+  If you call the above, you set a reference of obj in the frame, i.e when mark(vm_t *vm) is called, it sets the objects is_marked to true, which is false by default.
+
+// Important to free step by step since, stack only frees(stack->data) no the objects held by it(void*s)
+
+Freeing the VM(free_vm(vm_t *))
+  Freeing the frames -> free_frame(vm->frames->data[i]) -> free_stack(frame->references) <free(frame->references->data), objects not freed!> -> free_stack(frames)
+  During freeing objects 
+  Free every object in the VM -> free_obj(obj) -> free_stack(objects).
+free(vm);
+
+
+void free_vm(vm_t *vm)
+{
+    if (vm == NULL) {
+        return;
+    }
+    // Free all the frames in the VM.
+    for (int i = 0; i < vm->frames->top; i++) {
+        // Free every frame.
+        free_frame(vm->frames->data[i]);
+    }
+    free_stack(vm->frames);
+    // Free all the objects associated to the VM.
+    for (int i = 0; i < vm->objects->top; i++) {
+        free_obj(vm->objects->data[i]);
+    }
+    free_stack(vm->objects);
+    free(vm);
+}
+
+// Create a frame, and push it to the frames stack in VM.
+frame_t *get_frame(vm_t *vm)
+{
+    if (vm == NULL) {
+        fprintf(stderr, "VM = NULL!\n");
+        return NULL;
+    }
+    frame_t *frame = malloc(sizeof(frame_t));
+    if (frame == NULL) {
+        fprintf(stderr, "Failed creating a frame!\n");
+        return NULL;
+    }
+    frame->references = get_stack(8);
+    if (frame->references == NULL) {
+        free(frame);
+        fprintf(stderr, "Failed creating references for the frame!\n");
+        return NULL;
+    }
+    vm_push_frame(vm, frame);
+    return frame;
+}
+
+// A wrapper function to push the frame into the VM after its creation.
+void vm_push_frame(vm_t *vm, frame_t *frame)
+{
+    if (vm == NULL || frame == NULL) {
+      return;
+    }
+    push(vm->frames, (void *)frame);
+    return;
+}
+
+// Free a particular frame.
+void free_frame(frame_t *frame)
+{
+    if (frame == NULL) {
+        return;
+    }
+    // Free frame->references->data.
+    // Objects not freed.
+    free_stack(frame->references);
+    free(frame);
+}
+
+// Push an object to the objects stack of the VM.
+void vm_track_object(vm_t *vm, object_t *obj)
+{
+    if (vm == NULL || obj == NULL){
+        return;
+    }
+    push(vm->objects, (void*)obj);
+    return;
+}
+
+// Push an object into the frame.
+void frame_reference_obj(frame_t *frame, object_t *obj)
+{
+    if (frame == NULL || obj == NULL) {
+        return;
+    }
+    push(frame->references, (void *)obj);
+}
+
+// Iterate over each frame and set is_marked=true for every object that is referenced.
+void mark(vm_t *vm)
+{
+    if (vm == NULL) {
+        return;
+    }
+    // vm->frames <==> Stack of frames.
+    // vm->frames->data[i] <==> A frame(stack of references).
+    // vm->frames->data[i]->references->data[i] <==> object in the frame.
+    for (int i = 0; i < vm->frames->top; i++) {
+        // NOTE: A frame is pushed as void*
+        frame_t *frame = vm->frames->data[i];
+        for (int j = 0; j < frame->references->top; j++) {
+            object_t *obj = frame->references->data[j];
+            obj->is_marked = true;
+        }
+    }
+}
+
+// Should you even allow random index insertions?
+If yes, then should you free the object that is being overwritten by another object, also the danger of passing the same object.
+i.e if you free the overwritten object after you replace it with itself<a case> then you have a dangling pointer!
+
+==============Important==============
+Somehow create a function that can automatically place the object in the frame as soon as they are created. Without objects being in frame, you can't free them.
